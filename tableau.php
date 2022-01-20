@@ -1,11 +1,13 @@
 <?php
 // Déclaration d'un tableau de personnes
-$personnes = [
-    ["id" => 1, "prenom" => "Dupond", "nom" => "Jean", "email" => "jeandupond@php.fr"],
-    ["id" => 2, "prenom" => "Martin", "nom" => "Pierre", "email" => "pierremartin@php.fr"],
-    ["id" => 3, "prenom" => "Durand", "nom" => "Anne", "email" => "annedurand@php.fr"],
-    ["id" => 4, "prenom" => "Doe", "nom" => "John", "email" => "jondoe@php.fr"]
+$etudiants = [
+    ["id" => 1, "prenom" => "Dupond", "nom" => "Jean", "email" => "jeandupond@php.fr", "promo" => "BTS SIO1"],
+    ["id" => 2, "prenom" => "Martin", "nom" => "Pierre", "email" => "pierremartin@php.fr", "promo" => "BTS SIO1"],
+    ["id" => 3, "prenom" => "Durand", "nom" => "Anne", "email" => "annedurand@php.fr", "promo" => "BTS SIO2"],
+    ["id" => 4, "prenom" => "Doe", "nom" => "John", "email" => "johndoe@php.fr", "promo" => "BTS SIO2"],
+    ["id" => 5, "prenom" => "Thomas", "nom" => "Marie", "email" => "mariethomas@php.fr", "promo" => "BTS SIO1"]
 ];
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -20,27 +22,30 @@ $personnes = [
 </head>
 <body>
 <div class="container">
-    <h1>Liste des personnes</h1>
-    <table class="table table-responsive table-striped table-bordered mt-3 w-50 caption-top">
-        <caption>Nombre d'utilisateurs <span class="badge bg-success"><?= sizeof($personnes) ?> </span></caption>
+    <h1>Liste des étudiants en BTS SIO</h1>
+    <p>A la date du .......</p>
+    <table class="table mt-3 w-50 caption-top">
+        <caption>Nombre d'étudiants <span class="badge bg-success"><?= sizeof($etudiants) ?> </span></caption>
         <thead>
         <tr>
             <th scope=" col">ID</th>
-            <th scope="col">prénom</th>
+            <th scope="col">Prénom</th>
             <th scope="col">Nom</th>
             <th scope="col">Email</th>
+            <th scope="col">Promo</th>
             <th scope="col">Actions</th>
         </tr>
         </thead>
         <tbody>
         <?php
         // Parcours du tableau et affichage
-        foreach ($personnes as $personne) { ?>
-            <tr>
-                <td><?= $personne["id"] ?></td>
-                <td><?= $personne["prenom"] ?></td>
-                <td><?= $personne["nom"] ?></td>
-                <td><?= $personne["email"] ?></td>
+        foreach ($etudiants as $etudiant) { ?>
+            <tr <?php if ($etudiant["promo"] === "BTS SIO1") echo "class='table-success'"; else echo "class='table-warning'"; ?>>
+                <td><?= $etudiant["id"] ?></td>
+                <td><?= $etudiant["prenom"] ?></td>
+                <td><?= $etudiant["nom"] ?></td>
+                <td><?= $etudiant["email"] ?></td>
+                <td><?= $etudiant["promo"] ?></td>
                 <td class="d-flex justify-content-center">
                     <a href="#" class="btn btn-primary me-2">Editer</a>
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal"
