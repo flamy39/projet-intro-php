@@ -9,17 +9,74 @@
     <title>Intro PHP</title>
 </head>
 <body>
+    <main class="container mt-3">
+        <h2 class="text-primary fw-bold border border-primary" >Instructions de base</h2>
+        <h3>Chaines de caractères</h3>
+        <?php
+            echo 'BTS SIO1';
+        ?>
+        <?= 'BTS SIO1' ?>
+
+        <?php
+            echo '<p>BTS SIO1</p>';
+        ?>
+        <?= '<p>BTS SIO1</p>' ?>
+
+        <h3>Variables</h3>
+        <?php
+            $nom="Dupond";
+            echo "$nom</p>";
+        ?>
+
+        <?php
+            $nom="Dupond";
+            echo '<h1>Nom de la personne</h1>';
+            echo "<p class='text-primary'>$nom</p>";
+        ?>
+
+        <?php
+            $nom="Dupond";
+        ?>
+        <h1>Nom de la personne</h1>
+        <?= "<p class='text-primary'>$nom</p>" ?>
+
+       <!-- if -->
+    <h2 class="text-primary fw-bold border border-primary" >Condition if</h2>
+    <h3>Exemple 1</h3>
+    <?php
+        $age = 18;
+        if ($age >= 18) {
+            echo "<p>La personne est majeure</p>";
+        }
+    ?>
+
+    <h3>Exemple 2</h3>
+    <?php
+        $age = 18;
+        if ($age >= 18) { ?>
+            <p>La personne est majeure</p>
+        <?php } ?>
+
+    <h3>Exemple 3 : if syntaxe alternative</h3>
+    <?php
+          $age = 18;
+          if ($age >= 18): ?>
+           <p>La personne est majeure</p>
+        <?php endif; ?>
 
     <?php
-        $nom="Dupond";
-    ?>
-    <h1>Nom de la personne</h1>
-    <?= "<p class='text-primary'>$nom</p>" ?>
+        $age = 18;
+        if ($age >= 18):
+          echo "<p>La personne est majeure</p>";
+        endif;
     ?>
 
+
+    <!-- Boucle -->
+    <h2 class="text-primary fw-bold border border-primary">Boucle</h2>
     <?php
         for($i=0;$i<4;$i++) {
-            echo "<p> Salut </p>";
+            echo "<p>Salut</p>";
         }
     ?>
     <?php
@@ -42,6 +99,6 @@
         }
         echo "</ul>";
     ?>,
-
+    </main>
 </body>
 </html>
