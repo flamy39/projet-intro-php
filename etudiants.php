@@ -1,14 +1,22 @@
 <?php
-// Déclaration d'un tableau de personnes
-$etudiants = [
-    ["id" => 2, "nom" => "Martin", "prenom" => "Pierre", "email" => "pierremartin@php.fr", "promo" => "BTS SIO1"],
-    ["id" => 1, "nom" => "Dupond", "prenom" => "Jean", "email" => "jeandupond@php.fr", "promo" => "BTS SIO1"],
-    ["id" => 3, "nom" => "Durand", "prenom" => "Anne", "email" => "annedurand@php.fr", "promo" => "BTS SIO2"],
-    ["id" => 4, "nom" => "Doe", "prenom" => "John", "email" => "johndoe@php.fr", "promo" => "BTS SIO2"],
-    ["id" => 5, "nom" => "Thomas", "prenom" => "Marie", "email" => "mariethomas@php.fr", "promo" => "BTS SIO1"]
-];
-
+    require_once "./modele/etudiant/etudiantAccesDB.php";
+    require_once "./config/correspondances.php";
+  ?>
+<!-- Tester si le paramètre promo est présent dans la requête -->
+<?php
+    if (isset($_GET["promo"]) && !empty($_GET["promo"]))  {
+        $promotion = findCorrespondance($_GET["promo"]);
+        if ($promotion !== TOUTES_LES_PROMOTIONS) {
+            $etudiants = findEtudiantsByPromotion($promotion);
+        } else {
+            $etudiants = findAllEtudiants();
+        }
+    } else {
+        $promotion = '';
+        $etudiants = findAllEtudiants();
+    }
 ?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -25,11 +33,12 @@ $etudiants = [
 
 <!-- Barre de navigation -->
 <?php
-    include_once "header.php"
+include_once "./commun/header.php";
 ?>
 
 <main class="container mt-3">
-    <h1 class="mb-5"><i class="fas fa-user-graduate me-3 text-warning"></i>Liste des étudiants en BTS SIO</h1>
+    <h1 class="mb-5"><i class="fas fa-user-graduate me-3 text-warning"></i>
+        Liste des étudiants <?= $promotion?></h1>
     <div class="d-flex justify-content-between align-items-center">
         <p class="fs-4">Nombre d'étudiants <span class="badge bg-success"><?= sizeof($etudiants) ?> </span></p>
         <button class="btn btn-success btn-lg"> <i class="bi bi-person-plus me-2"></i>Ajouter un étudiant</button>
@@ -56,8 +65,8 @@ $etudiants = [
                     $couleur = $etudiant["promo"] === "BTS SIO1" ? 'table-primary' : 'table-secondary';
                 ?>
                 <td><?= $etudiant["id"] ?></td>
-                <td class="<?= $couleur ?>"><?= $etudiant["prenom"] ?></td>
-                <td <?php if ($etudiant["promo"] === "BTS SIO1") echo "class='table-primary'"; else echo "class='table-secondary'"  ?>><?= $etudiant["nom"] ?></td>
+                <td><?= $etudiant["prenom"] ?></td>
+                <td><?= $etudiant["nom"] ?></td>
                 <td><?= $etudiant["email"] ?></td>
                 <td><?= $etudiant["promo"] ?></td>
                 <td class="d-flex justify-content-center">

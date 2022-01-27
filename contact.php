@@ -1,5 +1,5 @@
 <?php
-    require_once 'config.php';
+    require_once './config/creneaux.php';
 ?>
 
 <!doctype html>
@@ -17,7 +17,7 @@
 
 <!-- Barre de navigation -->
 <?php
-include_once "header.php"
+include_once "./commun/header.php";
 ?>
 
 <main class="container mt-5">
